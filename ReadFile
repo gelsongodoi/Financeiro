@@ -1,0 +1,27 @@
+
+import java.io.FileInputStream;
+import java.io.IOException;
+import java.util.Properties;
+
+public class ReadFile {
+	public static Properties getProp() {
+		Properties props = new Properties();
+		try {
+			FileInputStream file = new FileInputStream("src/main/java/config.properties");
+			props.load(file);
+		} catch (IOException e) {
+			System.out.println("Arquivo nao localizado. " + e.getMessage());
+		}
+		return props;
+	}
+
+	public static void main(String args[]) {
+		String url;
+		String jndi;
+		Properties prop = getProp();
+		url = prop.getProperty("url");
+		jndi = prop.getProperty("jndi");
+		System.out.println("URL = " + url);
+		System.out.println("JNDI = " + jndi);
+	}
+}
